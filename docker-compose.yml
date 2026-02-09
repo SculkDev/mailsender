@@ -1,0 +1,15 @@
+services:
+  mailsender:
+    build: .
+    ports:
+      - "1432:1432"
+    environment:
+      - SENTRY_DSN=
+      - MAILSENDER_INTERNAL_KEY=your-secret-key
+      - SMTP_HOST=smtp.example.com
+      - SMTP_PORT=587
+      - SMTP_USERNAME=user@example.com
+      - SMTP_PASSWORD=password
+      - SMTP_FROM=noreply@example.com
+    volumes:
+      - "./templates:/app/templates"

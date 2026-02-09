@@ -1,0 +1,16 @@
+services:
+  mailsender:
+    image: docker.sculk.ltd/sculk-public/mailsender
+    restart: unless-stopped
+    ports:
+      - "1432:1432"
+    environment:
+      - SENTRY_DSN=${MAILSENDER_SENTRY_DSN}
+      - MAILSENDER_INTERNAL_KEY=${MAILSENDER_INTERNAL_KEY:-pleasechangeme}
+      - SMTP_HOST=${MAILSENDER_SMTP_HOST:-localhost}
+      - SMTP_PORT=${MAILSENDER_SMTP_PORT:-587}
+      - SMTP_USERNAME=${MAILSENDER_SMTP_USERNAME:-email@email.com}
+      - SMTP_PASSWORD=${MAILSENDER_SMTP_PASSWORD:-pleasechangeme}
+      - SMTP_FROM=${MAILSENDER_FROM:-email@email.com}
+    volumes:
+      - "./templates:/app/templates"
